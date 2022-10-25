@@ -4,13 +4,13 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "Working Experience\n\nhist(Titanic)\n\n\n\n\nWord cloud of Winston Churchill’s “This was their finest hour”, June 18, 1940\n\n\n\n\nwordcloud(names(wordCounts),wordCounts, min.freq=6,random.order=FALSE, max.words=50,scale=c(3,.5), rot.per=0.35,colors=brewer.pal(8,\"Dark2\"))"
+    "text": "Experience with R\n\nhist(Titanic)\n\n\n\n\nWord cloud of Winston Churchill’s “This was their finest hour”, June 18, 1940\n\n\n\n\nwordcloud(names(wordCounts),wordCounts, min.freq=6,random.order=FALSE, max.words=50,scale=c(3,.5), rot.per=0.35,colors=brewer.pal(8,\"Dark2\"))"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "G Argueta",
     "section": "",
-    "text": "To learn more about Quarto websites visit https://quarto.org/docs/websites.\n\nplot(iris, pch=20, cex=.5, col=\"firebrick\")"
+    "text": "To learn more about Quarto websites visit https://quarto.org/docs/websites.\n\nplot(iris, pch=20, cex=.5, col=\"firebrick\")\n\n\n\n\n\nplot(cars, xlab=\"Speed\", ylab=\"Distance\", col=\"blue\")"
   }
 ]
