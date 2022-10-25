@@ -4,7 +4,7 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "Working Experience\n\nplot(Titanic)"
+    "text": "Working Experience\n\nhist(Titanic)\n\n\n\n\nWord cloud of Winston Churchill’s “This was their finest hour”, June 18, 1940\n\n\n\n\nwordcloud(names(wordCounts),wordCounts, min.freq=6,random.order=FALSE, max.words=50,scale=c(3,.5), rot.per=0.35,colors=brewer.pal(8,\"Dark2\"))"
   },
   {
     "objectID": "index.html",
