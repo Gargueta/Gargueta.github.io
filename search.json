@@ -12,5 +12,19 @@
     "title": "G Argueta",
     "section": "",
     "text": "To learn more about Quarto websites visit https://quarto.org/docs/websites.\n\nplot(iris, pch=20, cex=.5, col=\"firebrick\")\n\n\n\n\n\nplot(cars, xlab=\"Speed\", ylab=\"Distance\", col=\"blue\")"
+  },
+  {
+    "objectID": "data_topics.html",
+    "href": "data_topics.html",
+    "title": "Data Topics",
+    "section": "",
+    "text": "Areas of research concerned with change should consider time, and effects of the past, as potentially important variables. Cross-sectional studies take measurements from a single point in time, while longitudinal studies take measurements in multiple waves over time. Reference to longitudinal data is common, but here the term longitudinal only is attributable to studies or research designs. Within a longitudinal design, there are repeated measurement and time series data. Repeat measurement is when measurements are taken over many waves but may not be collected at standard time intervals. Time series data are collected on regular intervals and should contain at least thirty measurements. Panel data may be repeated measurement or time series. The key feature of panel data is the measurement of the same entities over time, rather than collecting measurements from the same population even if the entities measured differ.\nThere are no universal rules or definitions for distinguishing between the terms longitudinal, time series, and panel with regard to study or data types, but these are the definitions used to guide the discussion on this site.\nPlanned interventions with study groups in comparison to control groups that do not receive an intervention are a common method used for testing hypotheses in longitudinal studies. Break point analysis is a method used to identify unintended or natural interventions that cause change in situations that were not designed or controlled. Break point analysis can also assist in identifying or verifying true changes when compared with stated beliefs about the drivers of change. Knowing the timing of change ensures that perceived drivers are temporally plausible."
+  },
+  {
+    "objectID": "studies.html",
+    "href": "studies.html",
+    "title": "Study Results",
+    "section": "",
+    "text": "Exploratory Data Analysis\nReview of US Bureau of Labor Statistics Occupation Projections - 2020 through 2030\nNote - Bureau of Labor Statistics data elements for education, training, and experience are ordered so that higher levels of a given variable are closer to zero. For example, lower levels of education are identified with higher numbers (4 through 8 are less than a bachelor’s degree) and higher levels of education are lower numbers (1 through 3 are bachelor’s degree requirements or higher). The result of this coding methodology is output that is not intuitive to interpret.\nJobs requiring higher level of training, experience, and education are not expected to experience as much volatility (large increases or decreases) as jobs requiring less training, experience, and education."
   }
 ]
