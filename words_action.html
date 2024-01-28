@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>G Argueta</title>
+<title>G Argueta - Words in Action</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -116,7 +116,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" rel="" target="" aria-current="page">
+    <a class="nav-link" href="./index.html" rel="" target="">
  <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
@@ -128,7 +128,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Data Topics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./words_action.html" rel="" target="">
+    <a class="nav-link active" href="./words_action.html" rel="" target="" aria-current="page">
  <span class="menu-text">Words in Action</span></a>
   </li>  
   <li class="nav-item">
@@ -155,8 +155,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><strong>Introduction</strong></a></li>
-  <li><a href="#r-scripts" id="toc-r-scripts" class="nav-link" data-scroll-target="#r-scripts"><strong>R Scripts</strong></a></li>
+  <li><a href="#word-clouds" id="toc-word-clouds" class="nav-link active" data-scroll-target="#word-clouds"><strong>Word Clouds</strong></a></li>
+  <li><a href="#quotes-for-thought" id="toc-quotes-for-thought" class="nav-link" data-scroll-target="#quotes-for-thought"><strong>Quotes for Thought</strong></a></li>
   </ul>
 </nav>
     </div>
@@ -165,7 +165,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">G Argueta</h1>
+<h1 class="title">Words in Action</h1>
 </div>
 
 
@@ -180,32 +180,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>This is a Quarto website. This website was developed to host my projects and data stories.</p>
-<p>To learn more about Quarto websites visit <a href="https://quarto.org/docs/websites" class="uri">https://quarto.org/docs/websites</a>.</p>
-<section id="introduction" class="level3">
-<h3 class="anchored" data-anchor-id="introduction"><strong>Introduction</strong></h3>
-<p>The site was built and developed in R Studio for the purpose of retaining projects, papers, and data models.</p>
+<section id="word-clouds" class="level3">
+<h3 class="anchored" data-anchor-id="word-clouds"><strong>Word Clouds</strong></h3>
+<p>Winston Churchill’s “This was their finest hour”, June 18, 1940</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wordcloud</span>(<span class="fu">names</span>(wordCounts),wordCounts, <span class="at">min.freq=</span><span class="dv">6</span>,<span class="at">random.order=</span><span class="cn">FALSE</span>, <span class="at">max.words=</span><span class="dv">50</span>,<span class="at">scale=</span><span class="fu">c</span>(<span class="dv">3</span>,.<span class="dv">5</span>), <span class="at">rot.per=</span><span class="fl">0.35</span>,<span class="at">colors=</span><span class="fu">brewer.pal</span>(<span class="dv">8</span>,<span class="st">"Dark2"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="words_action_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 </section>
-<section id="r-scripts" class="level3">
-<h3 class="anchored" data-anchor-id="r-scripts"><strong>R Scripts</strong></h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris, <span class="at">pch=</span><span class="dv">20</span>, <span class="at">cex=</span>.<span class="dv">5</span>, <span class="at">col=</span><span class="st">"firebrick"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cars, <span class="at">xlab=</span><span class="st">"Speed"</span>, <span class="at">ylab=</span><span class="st">"Distance"</span>, <span class="at">col=</span><span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(Titanic)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
+<section id="quotes-for-thought" class="level3">
+<h3 class="anchored" data-anchor-id="quotes-for-thought"><strong>Quotes for Thought</strong></h3>
+<p>“One can govern people only by showing them the future; a head of state is a merchant of hope.” attributed to Napoleon Bonaparte</p>
+<p>“He who receives an idea from me, receives instruction himself without lessening mine; as he who lights his taper at mine, receives light without darkening me.” attributed to Thomas Jefferson</p>
+<p>“Our lives begin to end the day we become silent about things that matter.” attributed to Martin Luther King Jr.</p>
+<p>“Religion isn’t the mystery of incarnation; it is the mystery of the social order” attributed to Napoleon Bonaparte</p>
+<p>“The chains of habit are too light to be felt until they are too heavy to be broken.” attributed to Warren Buffett</p>
+<p>“If you think education is expensive, try ignorance.” attributed to Robert Orben</p>
+<p>“Knowledge itself is power” attributed to Sir Francis Bacon ~ Ipsa scientia potestas est</p>
 
 
 </section>

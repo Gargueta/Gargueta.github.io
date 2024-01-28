@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>G Argueta</title>
+<title>G Argueta - Knowledge Mining</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,40 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -116,7 +82,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" rel="" target="" aria-current="page">
+    <a class="nav-link" href="./index.html" rel="" target="">
  <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
@@ -136,7 +102,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">CV and Contact Information</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./assignments.html" rel="" target="">
+    <a class="nav-link active" href="./assignments.html" rel="" target="" aria-current="page">
  <span class="menu-text">Knowledge Mining</span></a>
   </li>  
 </ul>
@@ -155,8 +121,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><strong>Introduction</strong></a></li>
-  <li><a href="#r-scripts" id="toc-r-scripts" class="nav-link" data-scroll-target="#r-scripts"><strong>R Scripts</strong></a></li>
+  <li><a href="#comparison-of-perspectives---what-is-the-objective-of-research-understanding-versus-prediction" id="toc-comparison-of-perspectives---what-is-the-objective-of-research-understanding-versus-prediction" class="nav-link active" data-scroll-target="#comparison-of-perspectives---what-is-the-objective-of-research-understanding-versus-prediction"><strong>Comparison of Perspectives - What is the Objective of Research? Understanding versus Prediction</strong></a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
   </ul>
 </nav>
     </div>
@@ -165,7 +131,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">G Argueta</h1>
+<h1 class="title">Knowledge Mining</h1>
 </div>
 
 
@@ -180,32 +146,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>This is a Quarto website. This website was developed to host my projects and data stories.</p>
-<p>To learn more about Quarto websites visit <a href="https://quarto.org/docs/websites" class="uri">https://quarto.org/docs/websites</a>.</p>
-<section id="introduction" class="level3">
-<h3 class="anchored" data-anchor-id="introduction"><strong>Introduction</strong></h3>
-<p>The site was built and developed in R Studio for the purpose of retaining projects, papers, and data models.</p>
+<section id="comparison-of-perspectives---what-is-the-objective-of-research-understanding-versus-prediction" class="level3">
+<h3 class="anchored" data-anchor-id="comparison-of-perspectives---what-is-the-objective-of-research-understanding-versus-prediction"><strong>Comparison of Perspectives - What is the Objective of Research? Understanding versus Prediction</strong></h3>
+<p>The following is a review of articles authors be Breiman (2001) and Shmueli (2010) regarding the usefulness and applicability of explanatory (or data) statistical models as opposed to predictive (or algorithmic) models.</p>
+<p>Breiman’s (2001) assessment of the two cultures in statistical modeling begins by illustrating that factors pass through real world functions to produce outcomes. The real world functions are characterized as nature’s black box which links predictor and response variables. This article’s focus is the comparison of data (or explanatory) models such as regressions, and random or random-like trials; with algorithmic (or predictive) models such as support vectors, forests, and deep learners. Breiman (2001) seems more critical of data models than their algorithmic counterparts and describes three types of issues encountered in the development of data models. The issues include:</p>
+<ol type="1">
+<li>The Rashomon or multiplicity problem – there may be several data model equations (that is, different predictors are included in various models), that display similar predictive abilities. If different variables can be included to result in the same predictive strength, how can a researcher ensure the selected variables are the most relevant to the question at hand? A data model researcher may suggest that this is the function and purpose of incorporating theory into modeling, but that is not discussed in the article.</li>
+<li>The Occam or simplicity versus accuracy problem – in many cases, a decision will need to be made during the model development process between simplicity (associated with interpretability) and accuracy. For data modeling, the ability to understand and interpret results are likely to take priority. In algorithmic models where prediction is the focus, the desire for accuracy may be paramount, regardless of the complexity of the model.</li>
+<li>The Bellman or dimensionality problem – Also known by the ominous expression, “curse of dimensionality”, this problem is encountered when the number of predictors necessary to reach a reasonable level of predictive power is high. This problem not only contributes to a model’s complexity and inhibits interpretability, it also complicates controls during research design and implementation.</li>
+</ol>
+<p>The article outlines specific examples of statistical modeling that could be summarized with the adage “garbage in, garbage out”. In addition, the article develops what seems to be a value judgement where algorithmic modeling techniques are more useful than data modeling techniques. This may be because of the authors background in consulting, where applied research efforts may be more prevalent than the basic research seen in publications and university settings.</p>
+<p>Algorithmic models may be able to more accurately predict outcomes based on what has past, but without an understanding of the underlying mechanisms driving change, it may not be possible to predict significant deviation from that past or understand how to influence the future. The ability to predict has many applications within warning systems, marketing, and diagnosis; but the ability to contravene or influence outcomes requires an understanding of the primary mechanisms at play within a given process. Understanding is not created by prediction alone, which is a likely reason that purely predictive tools are rarely seen in publications. Algorithmic models may struggle to answer the question, “So what?”.</p>
+<p>Shmueli (2010) notes that research may have more than one objective. It may be prediction and it may be identifying intervention points for understanding influences within processes. The article seeks to clarify the difference and different applications of explanatory (data) and predictive (algorithmic) models. Shmueli (2010) also notes that confusion surround these modeling methods has led to gaps between academia and practice, with each set of organizations pursuing different types of research. Academia’s focus has been basic sciences while practice has utilized applied sciences.</p>
+<p>The article provides several reasons for including predictive modeling in a research toolbox.</p>
+<ol type="1">
+<li>The ubiquitous nature of data in the information age may present new possibilities with the identification of new or better predictors for testing existing theories.</li>
+<li>Predictive models as exploratory analysis could lead to new theories for explaining natural processes.</li>
+<li>Predictive models could be used to assess the distance between current explanatory models and reality.</li>
+</ol>
+<p>Shmueli (2010) also covers the differences between basic and applied sciences in more detail. These terms have also been referred to as basic versus applied research, or research versus development. Basic research is undertaken to expand understanding in a certain field through systematic study. Applied research is the use of that understanding to create useful products or services. These research categories are not substitutes, they are compliments which rely on each other. If understanding was not expected to eventually benefit society, organizations and governments would have little incentive to fund basic research. If basic research was not producing new understanding, research for the application of understanding would not be possible. Applied research would struggle to use understanding if new knowledge was not being produced regularly.</p>
+<p>Although the author contrasts the design and implementation processes for explanatory and predictive models, Shmueli (2010) captures the key difference in these concepts in the description of how the three components of research are utilized. The three components being predictors, outcomes, and the function of the predictors. Predictors and outcomes are described as tools for the development of an estimated function for explanation. Whereas in predictive models, the function and predictors are tools for producing estimated outcomes.</p>
+<p>Shmueli’s (2010) arguments about the merits, uses, and purposeful application of both predictive and explanatory models are more compelling and more useful for data science practitioners across the academia-practice spectrum. Prediction and understanding are both useful endeavors and require different tools. In this way, big data (algorithmic or predictive) and small data (data or explanatory) cultures may benefit from the clarification of when the use of each method is justifiable based on the objectives and purpose of the research being conducted. This may be more useful than attempting to assign a culture or model value without regard for the needs of a particular study or project. When the job requires a nail, a hammer is the justifiable tool; for a screw, use a screwdriver.</p>
+<p>Breiman, L. (2001). Statistical modeling: The two cultures. Statistical Science, 16(3), 199–231. https://doi.org/10.1214/ss/1009213726</p>
+<p>Shmueli, G. (2010). To explain or to predict? Statistical Science, 25(3), 289–310. https://doi.org/10.1214/10-sts330</p>
 </section>
-<section id="r-scripts" class="level3">
-<h3 class="anchored" data-anchor-id="r-scripts"><strong>R Scripts</strong></h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris, <span class="at">pch=</span><span class="dv">20</span>, <span class="at">cex=</span>.<span class="dv">5</span>, <span class="at">col=</span><span class="st">"firebrick"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cars, <span class="at">xlab=</span><span class="st">"Speed"</span>, <span class="at">ylab=</span><span class="st">"Distance"</span>, <span class="at">col=</span><span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(Titanic)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
+<section id="section" class="level3">
+<h3 class="anchored" data-anchor-id="section"></h3>
 
 
 </section>
