@@ -9,7 +9,7 @@ Study of Support for the 2022 Student Loan Forgiveness Program
 ```{r results='hide', echo=FALSE, message=FALSE, warning=FALSE}
 
 #Load the Student Loan Forgiveness survey data
-SLData<-read.csv("C:/Users/HTPC/OneDrive/GRE Prep - PhD/22 Fall - EPPS 6302.001 - Methods of Data Collection/Paper/Loan Forgiveness Responses R Data2.csv")
+SLData<-read.csv("C:/Users/argue/OneDrive/GRE Prep - PhD/22 Fall - EPPS 6302.001 - Methods of Data Collection/Paper/Loan Forgiveness Responses R Data2.csv")
 
 # Load packages/library to get new function
 library(ggplot2)
@@ -316,7 +316,7 @@ Jobs requiring higher levels of training, experience, and education are not expe
 
 ```{r results='hide', echo=FALSE, message=FALSE, warning=FALSE}
 
-Group3Data<-read.delim("C:/Users/HTPC/OneDrive/GRE Prep - PhD/22 Spring - EPPS 6316.501 - Applied Regression/Group 3 Project/US BLS Employment Projection Data - 2-16-22.txt")
+Group3Data<-read.delim("C:/Users/argue/OneDrive/GRE Prep - PhD/22 Spring - EPPS 6316.501 - Applied Regression/Group 3 Project/US BLS Employment Projection Data - 2-16-22.txt")
 
 # regression for y of salary and x of education
 regression<-lm(Median.Annual.Wage.2020~Education.Code,data=Group3Data)

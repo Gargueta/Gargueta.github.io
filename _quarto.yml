@@ -9,7 +9,7 @@ website:
         text: Home
       - studies.qmd
       - data_topics.qmd
-      - Words_action.qmd
+      - words_action.qmd
       - cv.qmd
       - assignments.qmd
       
