@@ -13,6 +13,9 @@ library(easypackages)
 
 # Load multiple packages using easypackage function "packages"
 packages("XML","wordcloud","RColorBrewer","NLP","tm","quanteda", prompt = T)
+library(XML)
+library(tm)
+library(quanteda)
 
 # Download text data from website
 wcLocation<-URLencode("http://www.historyplace.com/speeches/churchill-hour.htm")
