@@ -1,0 +1,25 @@
+---
+title: "G Argueta"
+---
+
+This is a Quarto website. This website was developed to host my projects and data stories.
+
+To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+
+### **Introduction**
+
+The site was built and developed in R Studio for the purpose of retaining projects, papers, and data models.
+
+### **R Scripts**
+
+```{r}
+plot(iris, pch=20, cex=.5, col="firebrick")
+```
+
+```{r}
+plot(cars, xlab="Speed", ylab="Distance", col="blue")
+```
+
+```{r}
+hist(Titanic)
+```

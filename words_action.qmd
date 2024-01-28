@@ -1,0 +1,81 @@
+---
+title: "Words in Action"
+---
+
+### **Word Clouds**
+
+Winston Churchill's "This was their finest hour", June 18, 1940
+
+```{r results='hide', echo=FALSE, message=FALSE, warning=FALSE}
+
+# Install the easypackages package 
+library(easypackages)
+
+# Load multiple packages using easypackage function "packages"
+packages("XML","wordcloud","RColorBrewer","NLP","tm","quanteda", prompt = T)
+
+# Download text data from website
+wcLocation<-URLencode("http://www.historyplace.com/speeches/churchill-hour.htm")
+
+# use htmlTreeParse function to read and parse paragraphs
+doc.html<- htmlTreeParse(wcLocation, useInternal=TRUE)
+wc <- unlist(xpathApply(doc.html, '//p', xmlValue))
+wc
+head(wc, 3)
+
+# Vectorize vc 
+words.vec <- VectorSource(wc)
+
+# Check the class of words.vec
+class(words.vec)
+
+# Create Corpus object for preprocessing
+words.corpus <- Corpus(words.vec)
+inspect(words.corpus)
+
+# Turn all words to lower case
+words.corpus <- tm_map(words.corpus, content_transformer(tolower))
+
+# Remove punctuations, numbers
+words.corpus <- tm_map(words.corpus, removePunctuation)
+words.corpus <- tm_map(words.corpus, removeNumbers)
+
+# How about stopwords, then uniform bag of words created
+words.corpus <- tm_map(words.corpus, removeWords, stopwords("english"))
+
+# Create Term Document Matrix
+tdm <- TermDocumentMatrix(words.corpus)
+inspect(tdm)
+
+m <- as.matrix(tdm)
+wordCounts <- rowSums(m)
+wordCounts <- sort(wordCounts, decreasing=TRUE)
+head(wordCounts)
+
+# Create Wordcloud
+cloudFrame<-data.frame(word=names(wordCounts),freq=wordCounts)
+
+set.seed(1234)
+
+```
+
+```{r}
+wordcloud(names(wordCounts),wordCounts, min.freq=6,random.order=FALSE, max.words=50,scale=c(3,.5), rot.per=0.35,colors=brewer.pal(8,"Dark2"))
+```
+
+### **Quotes for Thought**
+
+"One can govern people only by showing them the future; a head of state is a merchant of hope." attributed to Napoleon Bonaparte
+
+"He who receives an idea from me, receives instruction himself without lessening mine; as he who lights his taper at mine, receives light without darkening me." attributed to Thomas Jefferson
+
+"Our lives begin to end the day we become silent about things that matter." attributed to Martin Luther King Jr.
+
+"Religion isn't the mystery of incarnation; it is the mystery of the social order" attributed to Napoleon Bonaparte
+
+"The chains of habit are too light to be felt until they are too heavy to be broken." attributed to Warren Buffett
+
+"If you think education is expensive, try ignorance." attributed to Robert Orben
+
+"Knowledge itself is power" attributed to Sir Francis Bacon \~ Ipsa scientia potestas est
+

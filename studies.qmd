@@ -1,0 +1,492 @@
+---
+title: "Study Results"
+---
+
+### **Role of Normative Ethics in Decision Making**
+
+Study of Support for the 2022 Student Loan Forgiveness Program
+
+```{r results='hide', echo=FALSE, message=FALSE, warning=FALSE}
+
+#Load the Student Loan Forgiveness survey data
+SLData<-read.csv("C:/Users/HTPC/OneDrive/GRE Prep - PhD/22 Fall - EPPS 6302.001 - Methods of Data Collection/Paper/Loan Forgiveness Responses R Data2.csv")
+
+# Load packages/library to get new function
+library(ggplot2)
+library(GGally)
+
+# Chi-squared to look for differences in the reasons to support or opposition the Loan Forgiveness Program
+chisq.test(SLData$Combo.Cat,SLData$Support.ID,correct = FALSE, B=2000)
+
+# Regression - is loan experience a strong predictor of program support or return to college?
+LoanExp_SupReg<-lm(Support.ID~Loan.Exp.ID,data=SLData)
+summary(LoanExp_SupReg)
+LoanExp_RetReg<-lm(Return.Coll.ID~Loan.Exp.ID,data=SLData)
+summary(LoanExp_RetReg)
+
+# Regression - is program familiarity a strong predictor of program support or return to college?
+Familiarity_SupReg<-lm(Support.ID~Familiarity.ID,data=SLData)
+summary(Familiarity_SupReg)
+Familiarity_RetReg<-lm(Return.Coll.ID~Familiarity.ID,data=SLData)
+summary(Familiarity_RetReg)
+
+# Regression - is education level a strong predictor of program support or return to college?
+Ed_SupReg<-lm(Support.ID~Education.ID,data=SLData)
+summary(Ed_SupReg)
+Ed_RetReg<-lm(Return.Coll.ID~Education.ID,data=SLData)
+summary(Ed_RetReg)
+
+# Regression - is age a strong predictor of program support or return to college?
+Age_SupReg<-lm(Support.ID~Age.ID,data=SLData)
+summary(Age_SupReg)
+Age_RetReg<-lm(Return.Coll.ID~Age.ID,data=SLData)
+summary(Age_RetReg)
+
+# Regression - is income a strong predictor of program support or return to college?
+Income_SupReg<-lm(Support.ID~Income.ID,data=SLData)
+summary(Income_SupReg)
+Income_RetReg<-lm(Return.Coll.ID~Income.ID,data=SLData)
+summary(Income_RetReg)
+
+# Multiple regression - all indicators predicting program support or return to college
+AllID_SupReg<-lm(Support.ID~Loan.Exp.ID+Familiarity.ID+Education.ID+Age.ID+Income.ID,data=SLData)
+summary(AllID_SupReg)
+AllID_RetReg<-lm(Return.Coll.ID~Loan.Exp.ID+Familiarity.ID+Education.ID+Age.ID+Income.ID,data=SLData)
+summary(AllID_RetReg)
+
+# Gally regression plot for all predictor multiple regression
+ggcoef(AllID_SupReg, exclude_intercept = TRUE, errorbar_size = 1) +
+  xlab("Coefficient Estimate with 95% Confidence") + ylab("") +
+  ggtitle("Coefficient Plot for Predictors of Program Support") +
+  theme(axis.text=element_text(size=11), 
+        plot.title = element_text(size=11,hjust=.5),
+        axis.title=element_text(size=11))
+ggcoef(AllID_RetReg, exclude_intercept = TRUE, errorbar_size = 1) +
+  xlab("Coefficient Estimate with 95% Confidence") + ylab("") +
+  ggtitle("Coefficient Plot for Predictors of Returning to College") +
+  theme(axis.text=element_text(size=11), 
+        plot.title = element_text(size=11,hjust=.5),
+        axis.title=element_text(size=11))
+
+### Barplot for support or opposition
+DecisionH1<-aggregate(SLData$Support.,by=list(SLData$Support.),FUN=length)
+names(DecisionH1)[1]<-"Support"
+names(DecisionH1)[2]<-"Responses"
+ggplot(DecisionH1,aes(x=Support,y=Responses,fill=Support),xlab="Count")+
+  geom_bar(stat = "identity",width=.5,position="dodge")+
+  labs(title="Support for the Student Loan Forgiveness Program")+theme(plot.title=element_text(hjust=.5))
+
+# Barplot for decision reason
+Reason_All<-aggregate(SLData$Combo.Cat,by=list(SLData$Combo.Cat),FUN=length)
+names(Reason_All)[1]<-"Reason"
+names(Reason_All)[2]<-"Responses"
+ggplot(Reason_All,aes(x=Reason,y=Responses,fill=Reason),xlab="Count")+
+  geom_bar(stat = "identity",width=.5,position="dodge")+
+  labs(title="Responses by Reason Category")+theme(plot.title=element_text(hjust=.5))
+
+# Barplot for support decision reason
+DecisionbyGender<-aggregate(SLData$Support.,by=list(SLData$Gender,SLData$Support.),FUN=length)
+
+# Barplot for support decision reason
+DecisionReason<-aggregate(SLData$Support.,by=list(SLData$Combo.Cat,SLData$Support.),FUN=length)
+names(DecisionReason)[1]<-"Reason"
+names(DecisionReason)[2]<-"Support"
+names(DecisionReason)[3]<-"Responses"
+
+# Barplot for support by support reason
+ggplot(DecisionReason,aes(x=Reason,y=Responses,fill=Support),xlab="Count") +
+  geom_bar(stat="identity",width=.5,position="dodge")+
+  labs(title="Support by Reason")+theme(plot.title=element_text(hjust=.5))
+
+#Barplot for support by support reason - percentage view
+ggplot(DecisionReason,aes(x=Reason,y=Responses,fill=Support),xlab="Count")+
+  geom_bar(stat = "identity",width=.5,position="fill")+
+  labs(title="Support by Reason Percentage")+theme(plot.title=element_text(hjust=.5))
+
+### Gender summary data only
+SuppbyGender_Data<-aggregate(SLData$Gender,by=list(SLData$Gender),FUN=length)
+names(SuppbyGender_Data)[1]<-"Gender"
+names(SuppbyGender_Data)[2]<-"Responses"
+
+# Barplot for support by Gender
+SuppbyGender<-aggregate(SLData$Support.,by=list(SLData$Gender,SLData$Support.),FUN=length)
+names(SuppbyGender)[1]<-"Gender"
+names(SuppbyGender)[2]<-"Support"
+names(SuppbyGender)[3]<-"Responses"
+
+#DecisionBar<-ggplot(SuppbyGender,aes(x=Gender,y=Responses,fill=Reason))+geom_bar(stat = "identity")
+#DecisionBar+labs(x="Response Count",y="Decision Category",title="Number of Participants by Decision Category")
+
+# Barplot for support by gender
+ggplot(SuppbyGender,aes(x=Gender,y=Responses,fill=Support),xlab="Count") +
+  geom_bar(stat="identity",width=.5,position="dodge")+
+  labs(title="Support by Gender")+theme(plot.title=element_text(hjust=.5))
+
+# Barplot for support by gender - percentage view
+ggplot(SuppbyGender,aes(x=Gender,y=Responses,fill=Support),xlab="Count")+
+  geom_bar(stat = "identity",width=.5,position="fill")+
+  labs(title="Support by Gender Percentage")+theme(plot.title=element_text(hjust=.5))
+
+### Barplot for Reason by Gender
+ReasonbyGender<-aggregate(SLData$Combo.Cat,by=list(SLData$Gender,SLData$Combo.Cat),FUN=length)
+names(ReasonbyGender)[1]<-"Gender"
+names(ReasonbyGender)[2]<-"Reason"
+names(ReasonbyGender)[3]<-"Responses"
+
+# Barplot for Reason by Gender
+ggplot(ReasonbyGender,aes(x=Gender,y=Responses,fill=Reason),xlab="Count") +
+  geom_bar(stat="identity",width=.5,position="dodge")+
+  labs(title="Reason by Gender")+theme(plot.title=element_text(hjust=.5),
+                                          axis.text.x=element_text(angle=20))
+
+#Barplot for Reason by Gender - percentage view
+ggplot(ReasonbyGender,aes(x=Reason,y=Responses,fill=Gender),xlab="Count")+
+  geom_bar(stat = "identity",width=.5,position="fill")+
+  labs(title="Reason by Gender Percentage")+theme(plot.title=element_text(hjust=.5),
+                                          axis.text.x=element_text(angle=0))
+
+### Barplot for support by Ethnicity
+SuppbyEthnicity_Data<-aggregate(SLData$Support.,by=list(SLData$Ethnicity),FUN=length)
+names(SuppbyEthnicity_Data)[1]<-"Ethnicity"
+names(SuppbyEthnicity_Data)[2]<-"Responses"
+
+SuppbyEthnicity<-aggregate(SLData$Support.,by=list(SLData$Ethnicity,SLData$Support.),FUN=length)
+names(SuppbyEthnicity)[1]<-"Ethnicity"
+names(SuppbyEthnicity)[2]<-"Support"
+names(SuppbyEthnicity)[3]<-"Responses"
+
+# Barplot for support by Ethnicity
+ggplot(SuppbyEthnicity,aes(x=Ethnicity,y=Responses,fill=Support),xlab="Count") +
+  geom_bar(stat="identity",width=.5,position="dodge")+
+  labs(title="Support by Ethnicity")+theme(plot.title=element_text(hjust=.5),
+      axis.text.x=element_text(angle=20))
+
+#Barplot for support by Ethnicity - percentage view
+ggplot(SuppbyEthnicity,aes(x=Ethnicity,y=Responses,fill=Support),xlab="Count")+
+  geom_bar(stat = "identity",width=.5,position="fill")+
+  labs(title="Support by Ethnicity Percentage")+theme(plot.title=element_text(hjust=.5),
+      axis.text.x=element_text(angle=20))
+
+### Barplot for Reason by Ethnicity
+ReasonbyEthnicity<-aggregate(SLData$Combo.Cat,by=list(SLData$Ethnicity,SLData$Combo.Cat),FUN=length)
+names(ReasonbyEthnicity)[1]<-"Ethnicity"
+names(ReasonbyEthnicity)[2]<-"Reason"
+names(ReasonbyEthnicity)[3]<-"Responses"
+
+# Barplot for Reason by Ethnicity
+ggplot(ReasonbyEthnicity,aes(x=Ethnicity,y=Responses,fill=Reason),xlab="Count") +
+  geom_bar(stat="identity",width=.5,position="dodge")+
+  labs(title="Reason by Ethnicity")+theme(plot.title=element_text(hjust=.5),
+                                           axis.text.x=element_text(angle=20))
+
+#Barplot for Reason by Ethnicity - percentage view
+ggplot(ReasonbyEthnicity,aes(x=Ethnicity,y=Responses,fill=Reason),xlab="Count")+
+  geom_bar(stat = "identity",width=.5,position="fill")+
+  labs(title="Reason by Ethnicity Percentage")+theme(plot.title=element_text(hjust=.5),
+                                          axis.text.x=element_text(angle=20))
+
+### Barplot for Return to College by Ethnicity
+ReturnbyEthnicity_Data<-aggregate(SLData$Return.to.College,by=list(SLData$Return.to.College),FUN=length)
+names(ReturnbyEthnicity_Data)[1]<-"Return"
+names(ReturnbyEthnicity_Data)[2]<-"Responses"
+
+ReturnbyEthnicity<-aggregate(SLData$Return.to.College,by=list(SLData$Ethnicity,SLData$Return.to.College),FUN=length)
+names(ReturnbyEthnicity)[1]<-"Ethnicity"
+names(ReturnbyEthnicity)[2]<-"Return"
+names(ReturnbyEthnicity)[3]<-"Responses"
+
+# Barplot for Return to College by Ethnicity
+ggplot(ReturnbyEthnicity,aes(x=Ethnicity,y=Responses,fill=Return),xlab="Count") +
+  geom_bar(stat="identity",width=.5,position="dodge")+
+  labs(title="Return to College by Ethnicity")+theme(plot.title=element_text(hjust=.5),
+                                          axis.text.x=element_text(angle=20))
+
+#Barplot for Return to College by Ethnicity - percentage view
+ggplot(ReturnbyEthnicity,aes(x=Ethnicity,y=Responses,fill=Return),xlab="Count")+
+  geom_bar(stat = "identity",width=.5,position="fill")+
+  labs(title="Return to College by Ethnicity Percentage")+theme(plot.title=element_text(hjust=.5),
+                                                     axis.text.x=element_text(angle=20))
+
+### Barplots for Age
+SuppbyAge_Data<-aggregate(SLData$Support.,by=list(SLData$Age),FUN=length)
+names(SuppbyAge_Data)[1]<-"Age"
+names(SuppbyAge_Data)[2]<-"Responses"
+
+# Barplot for support by age
+SuppbyAge<-aggregate(SLData$Support.,by=list(SLData$Age,SLData$Support.),FUN=length)
+names(SuppbyAge)[1]<-"Age"
+names(SuppbyAge)[2]<-"Support"
+names(SuppbyAge)[3]<-"Responses"
+
+# Barplot for support by age
+ggplot(SuppbyAge,aes(x=Age,y=Responses,fill=Support),xlab="Count") +
+  geom_bar(stat="identity",width=.5,position="dodge")+
+  labs(title="Support by Age")+theme(plot.title=element_text(hjust=.5),
+      axis.text.x=element_text(angle=0))
+
+#Barplot for support by age - percentage view
+ggplot(SuppbyAge,aes(x=Age,y=Responses,fill=Support),xlab="Count")+
+  geom_bar(stat = "identity",width=.5,position="fill")+
+  labs(title="Support by Age Percentage")+theme(plot.title=element_text(hjust=.5),
+      axis.text.x=element_text(angle=0))
+
+# Barplot for reason by age
+SuppReasonbyAge<-aggregate(SLData$Combo.Cat,by=list(SLData$Age,SLData$Combo.Cat),FUN=length)
+names(SuppReasonbyAge)[1]<-"Age"
+names(SuppReasonbyAge)[2]<-"Reason"
+names(SuppReasonbyAge)[3]<-"Responses"
+
+# Barplot for reason by age
+ggplot(SuppReasonbyAge,aes(x=Age,y=Responses,fill=Reason),xlab="Count") +
+  geom_bar(stat="identity",width=.5,position="dodge")+
+  labs(title="Support Reason by Age")+theme(plot.title=element_text(hjust=.5),
+                                     axis.text.x=element_text(angle=0))
+
+#Barplot for reason by age - percentage view
+ggplot(SuppReasonbyAge,aes(x=Age,y=Responses,fill=Reason),xlab="Count")+
+  geom_bar(stat = "identity",width=.5,position="fill")+
+  labs(title="Support Reason by Age Percentage")+theme(plot.title=element_text(hjust=.5),
+                                                axis.text.x=element_text(angle=0))
+
+### Subsets for Support and Opposition Reasons
+Loan_Exp_Only<-subset(SLData,Loan.Experience!="No")
+
+# Chi-squared to look for differences in the reasons to support or opposition the Loan Forgiveness Program by Ethnicity
+Ethnicity_3Larg_Reason<-subset(SLData,!(Ethnicity%in%c('Alaska or American Native','Black or African American','Other')))
+chisq.test(Ethnicity_3Larg_Reason$Ethnicity,Ethnicity_3Larg_Reason$Combo.Cat,correct = FALSE, B=2000)
+
+Ethnicity_2Larg_Reason<-subset(SLData,!(Ethnicity%in%c('Alaska or American Native','Black or African American','Other','Hispanic')))
+chisq.test(Ethnicity_2Larg_Reason$Ethnicity,Ethnicity_2Larg_Reason$Combo.Cat,correct = FALSE, B=2000)
+
+# Regression - is loan balance a strong predictor of program support or return to college among respondents with loan experience?
+LoanBalance_SupReg<-lm(Support.ID~Loan.Bal.ID,data=Loan_Exp_Only)
+summary(LoanBalance_SupReg)
+LoanBalance_ReturnReg<-lm(Return.Coll.ID~Loan.Bal.ID,data=Loan_Exp_Only)
+summary(LoanBalance_ReturnReg)
+
+# Multiple regression - all indicators predicting program support among those with loan experience
+AllID_LoanExp_SupReg<-lm(Support.ID~Loan.Bal.ID+Familiarity.ID+Education.ID+Age.ID+Income.ID,data=Loan_Exp_Only)
+summary(AllID_LoanExp_SupReg)
+
+# Multiple regression - all indicators predicting return to college among those with loan experience
+AllID_LoanExp_ReturnReg<-lm(Return.Coll.ID~Loan.Bal.ID+Familiarity.ID+Education.ID+Age.ID+Income.ID,data=Loan_Exp_Only)
+summary(AllID_LoanExp_ReturnReg)
+
+# Gally regression plot for all predictor multiple regression - program support among those with loan experience
+ggcoef(AllID_LoanExp_SupReg, exclude_intercept = TRUE, errorbar_size = 1) +
+  xlab("Coefficient Estimate with 95% Confidence") + ylab("") +
+  ggtitle("Coefficient Plot for Predictors of Program Support - Loan Experience") +
+  theme(axis.text=element_text(size=11), 
+        plot.title = element_text(size=11,hjust=.5),
+        axis.title=element_text(size=11))
+
+### Coefficient correlation plot
+LoanCollinearity<-Loan_Exp_Only[c("Loan.Bal.ID","Income.ID","Familiarity.ID","Education.ID","Age.ID")]
+plot(LoanCollinearity,pch=20,cex=.5,col="firebrick")
+CollinLoanBal<-lm(Loan.Bal.ID~Income.ID,data=LoanCollinearity)
+summary(CollinLoanBal)
+
+# Barplot for collinearity 
+CollinLoanView<-aggregate(LoanCollinearity$Loan.Bal.ID,by=list(LoanCollinearity$Income.ID,LoanCollinearity$Loan.Bal.ID),FUN=length)
+names(CollinLoanView)[1]<-"Income"
+names(CollinLoanView)[2]<-"LoanBalance"
+names(CollinLoanView)[3]<-"Responses"
+
+# Barplot for collinearity 
+ggplot(CollinLoanView,aes(x=Income,y=Responses,fill=LoanBalance),xlab="Count") +
+  geom_bar(stat="identity",width=.5,position="dodge")+
+  labs(title="Loan Balance by Income Level")+theme(plot.title=element_text(hjust=.5),
+      axis.text.x=element_text(angle=0))
+
+#Barplot for collinearity  - percentage view
+ggplot(CollinLoanView,aes(x=Income,y=Responses,fill=LoanBalance),xlab="Count")+
+  geom_bar(stat = "identity",width=.5,position="fill")+
+  labs(title="Loan Balance by Income Percentage")+theme(plot.title=element_text    (hjust=.5),
+      axis.text.x=element_text(angle=0))
+
+```
+
+### **Exploratory Data Analysis**
+
+Review of US Bureau of Labor Statistics Occupation Projections - 2020 through 2030
+
+Note - Bureau of Labor Statistics data elements for education, training, and experience are ordered so that higher levels of a given variable are closer to zero. For example, lower levels of education are identified with higher numbers (4 through 8 are less than a bachelor's degree) and higher levels of education are lower numbers (1 through 3 are bachelor's degree requirements or higher). The result of this coding methodology is output that is not intuitive to interpret.
+
+Jobs requiring higher levels of training, experience, and education are not expected to experience as much volatility (large increases or decreases) as jobs requiring less training, experience, and education.
+
+```{r results='hide', echo=FALSE, message=FALSE, warning=FALSE}
+
+Group3Data<-read.delim("C:/Users/HTPC/OneDrive/GRE Prep - PhD/22 Spring - EPPS 6316.501 - Applied Regression/Group 3 Project/US BLS Employment Projection Data - 2-16-22.txt")
+
+# regression for y of salary and x of education
+regression<-lm(Median.Annual.Wage.2020~Education.Code,data=Group3Data)
+summary(regression)
+
+# regression for y of salary and x of work experience
+regression2<-lm(Median.Annual.Wage.2020~Workex.Code,data=Group3Data)
+summary(regression2)
+
+# regression for y of salary and x of On the job training
+regression3<-lm(Median.Annual.Wage.2020~trCode,data=Group3Data)
+summary(regression3)
+
+# multiple regression for y of salary and x1 of education and x2 of work experience
+Mregress<-lm(Median.Annual.Wage.2020~Education.Code+Workex.Code,data=Group3Data)
+summary(Mregress)
+
+# multiple regression for y=salary,x1=education,x2=work experience,x3 job training
+Mregress2<-lm(Median.Annual.Wage.2020~Education.Code+Workex.Code+trCode,data=Group3Data)
+summary(Mregress2)
+
+# multiple regression for y=salary,x1=education,x2=work experience,x3 job training
+Mregress3<-lm(Employment.Change..2020.2030~Education.Code+Workex.Code+trCode,data=Group3Data)
+summary(Mregress3)
+
+# regression for y=Employment Change,x1=Salary
+Mregress4<-lm(Employment.Change..2020.2030~Median.Annual.Wage.2020,data=Group3Data)
+summary(Mregress4)
+
+
+# Load packages/library to get new function
+#install.packages("Hmisc")
+library(Hmisc)
+#install.packages("ggplot2")
+library(ggplot2)
+#install.packages("dplyr")
+library(dplyr)
+#install.packages("ggthemes")
+library(ggthemes)
+#install.packages("tidyverse")
+library(tidyverse)
+#install.packages("texreg") # regression output summary report
+library(texreg)
+#install.packages("stargazer") # regression output summary report
+library(stargazer)
+#install.packages("GGally")  # for the coefficient plot (alternate method for showing regression)
+library(GGally)
+#install.packages("car") # for linearHypothesis() function
+library(car)
+
+# Aggregate data by occupation group
+OccupationGroup<-aggregate(Group3Data$Median.Annual.Wage.2020,by=list(Group3Data$Occupation.Group),FUN=mean)
+summary(OccupationGroup)
+
+# Boxplot for occupations and salary
+#PlotData<-boxplot(Median.Annual.Wage.2020~Occupation.Group, data=Group3Data,notch=FALSE,
+        #col=(c("green","green")),main="Boxplot for Occupation and Salary",
+        #xlab="",ylab="Salary",pars=list(xaxt="n"))
+#tick<-seq_along(PlotData$names)
+#axis(1,at=tick,labels=FALSE)
+#text(tick, par("usr")[3]-17,PlotData$names,adj=1,srt=35,xpd=TRUE)
+
+# Boxplot for occupations and salary
+#boxplot(Median.Annual.Wage.2020~Occupation.Group, data=Group3Data,notch=FALSE,col=(c("green","green")),main="Boxplot for Occupation and Salary",xlab="Occupation",ylab="Salary")
+
+# Scatter plot for education to salary
+#plot(x=Group3Data$Education.Code,y=Group3Data$Median.Annual.Wage.2020,
+     #main="Title",xlab="X",ylab="Y",xlim=c(1,10),ylim=c(20000,250000))
+
+# Scatter plot for education to salary
+plot(x=Group3Data$Education.Code,y=Group3Data$Median.Annual.Wage.2020,
+     main="Scatter Plot for Education and Salary",xlab="Education",ylab="Salary")
+
+# Scatter plot for salary and change in jobs
+plot(x=Group3Data$Median.Annual.Wage.2020,y=Group3Data$Employment.Percent.Change..2020.2030,
+     main="Scatter Plot for Salary and Change in Jobs",xlab="Salary",ylab="% Change in Jobs")
+
+# Scatter plot for education and change in jobs
+plot(x=Group3Data$Education.Code,y=Group3Data$Employment.Percent.Change..2020.2030,
+     main="Scatter Plot for Education and Change in Jobs",xlab="Education",ylab="% Change in Jobs")
+
+# create a education dummy between bachelor's and higher edcuation and lower ed levels
+Group3Data$eddummy<-"1"
+Group3Data$eddummy[which(Group3Data$Education.Code>"3")]<-"0"
+
+# Scatter plot for education and change in jobs
+plot(x=Group3Data$eddummy,y=Group3Data$Employment.Percent.Change..2020.2030,
+     main="Scatter Plot for Education and Change in Jobs",xlab="Education",ylab="% Change in Jobs")
+
+# Boxplot for education and change in jobs
+boxplot(Employment.Percent.Change..2020.2030~eddummy, data=Group3Data,
+        notch=FALSE,col=(c("green","green")),main="Boxplot for Education and Change in Jobs",
+        xlab="Education: 0<Bachelor's, 1>=Bachelor's",ylab="% Change in Jobs")
+
+#boxplot(Employment.Percent.Change..2020.2030~eddummy, data=Group3Data,
+#        notch=FALSE,main="Boxplot: Change in Occupation and Education",
+#        xlab="Education: 0<Bachelor's, 1>=Bachelor's",ylab="Percentage Change")
+
+xtabs(~Employment.Percent.Change..2020.2030+Median.Annual.Wage.2020,Group3Data)
+BarTable<-xtabs(~Employment.Percent.Change..2020.2030+Median.Annual.Wage.2020,Group3Data)
+#barplot(height=BarTable,beside=TRUE, main="NDIR Variance from Mean by Relative Tax",
+#        xlab="Relative Tax",ylab="Variance from Mean")
+
+Group3Sub1<-aggregate(Group3Data$Employment.Percent.Change..2020.2030,
+        by=list(Group3Data$Occupation.Group),FUN=mean)
+EmplChangeGroup<-aggregate(Group3Data$Employment.Percent.Change..2020.2030,
+        by=list(Group3Data$Occupation.Group),FUN=mean)
+#barplot(height=BarTable,beside=TRUE, main="NDIR Variance from Mean by Relative Tax",
+#        xlab="Relative Tax",ylab="Variance from Mean")
+
+aggregate(Group3Data$Employment.Percent.Change..2020.2030,
+        by=list(Group3Data$Occupation.Group),FUN=mean)
+
+### Barplot for change in employment groups
+GroupBar<-ggplot(EmplChangeGroup,aes(x=x,y=Group.1))+geom_bar(stat = "identity")
+GroupBar+labs(x="% Change in Employment - 7% Average",y="Employment Group",
+              title="Estimated Employment Change - 2030")
+
+### Build aggregate data frame
+df<-data.frame(PrctChgEmpl=c(aggregate(Group3Data$Employment.Percent.Change..2020.2030,
+            by=list(Group3Data$Occupation.Group),FUN=mean)),
+        NumbChgEmpl=c(aggregate(Group3Data$Employment.Change..2020.2030,
+            by=list(Group3Data$Occupation.Group),FUN=mean)),
+        NumbOpenings=c(aggregate(Group3Data$Occupational.Openings..2020.2030.Annual.Average,
+            by=list(Group3Data$Occupation.Group),FUN=mean)),
+        Salary=c(aggregate(Group3Data$Median.Annual.Wage.2020,
+            by=list(Group3Data$Occupation.Group),FUN=mean)),
+        Edcd=c(aggregate(Group3Data$Education.Code,
+            by=list(Group3Data$Occupation.Group),FUN=mean)),
+        Expercd=c(aggregate(Group3Data$Workex.Code,
+            by=list(Group3Data$Occupation.Group),FUN=mean)),
+        Trncd=c(aggregate(Group3Data$trCode,
+            by=list(Group3Data$Occupation.Group),FUN=mean)))
+
+### Scatter plot for education and change in jobs
+plot(x=df$Salary.x,y=df$PrctChgEmpl.x,main="Change in Occupation and Salary",
+     xlab="Salary",ylab="Percentage Change",xlim=c(20000,120000))
+plot(x=df$Edcd.x,y=df$PrctChgEmpl.x,main="Change in Occupation and Education",
+     xlab="Education Level",ylab="Percentage Change")
+plot(x=df$Expercd.x,y=df$PrctChgEmpl.x,main="Change in Occupation and Experience",
+     xlab="Experience Level",ylab="Percentage Change")
+plot(x=df$Trncd.x,y=df$PrctChgEmpl.x,main="Change in Occupation and Training",
+     xlab="On-the-Job-Training Level",ylab="Percentage Change")
+
+# multiple regression for y=salary,x1=education,x2=work experience,x3 job training
+Mregress3<-lm(Employment.Percent.Change..2020.2030~Median.Annual.Wage.2020+Education.Code+Workex.Code+trCode,data=Group3Data)
+summary(Mregress3)
+
+Mregress1<-lm(Employment.Percent.Change..2020.2030~Median.Annual.Wage.2020,data=Group3Data)
+summary(Mregress1)
+
+# Gally regression plot
+ggcoef(Mregress3, exclude_intercept = TRUE, errorbar_size = 1) +
+  xlab("Coefficient Estimate with 95% Confidence") + ylab("") +
+  ggtitle("Coefficient Plot for Changes in Occupations") +
+  theme(axis.text=element_text(size=11), 
+        plot.title = element_text(size=11,hjust=.5),
+        axis.title=element_text(size=11))
+
+
+# review of major drivers of current salaries- regression
+Mregress4<-lm(Median.Annual.Wage.2020~Education.Code+Workex.Code+trCode,data=Group3Data)
+summary(Mregress4)
+
+# Gally regression plot
+#ggcoef(Mregress4, exclude_intercept = TRUE, errorbar_size = 1) +
+#  xlab("Coefficient Estimate with 95% Confidence") + ylab("") +
+#  ggtitle("Coefficient Plot for Changes in Employment") +
+#  theme(axis.text=element_text(size=11), 
+#        plot.title = element_text(size=11),
+#        axis.title=element_text(size=11))
+
+```
